@@ -11,8 +11,15 @@ ENV GVM_LIBS_VERSION='v20.8.0' \
     DEBIAN_FRONTEND=noninteractive \
     TERM=dumb
 
+RUN apt-get update && apt-get install libxml2-dev libxslt-dev python-dev -y
+
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && \
     apt-get install \
+        findutils \
+        tar \
+        libsodium-dev \
+        python3-lxml \
+        python-lxml \
         postgresql \
         postgresql-contrib \
         postgresql-server-dev-all \
@@ -63,6 +70,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-utils && \
     apt-get install texlive-fonts-recommended -yq && \
     rm -rf /var/lib/apt/lists/*
 
+ENV SODIUM_INSTALL="system pip3 install --no-binary :all: pynacl"
+
 RUN pip3 install \
         lxml \
         gvm-tools \
@@ -73,12 +82,12 @@ RUN pip3 install \
 
 RUN mkdir ${SRC_PATH} -p && \
     cd ${SRC_PATH} && \
-    curl -o gvm-libs.tar.gz -sL https://github.com/greenbone/gvm-libs/archive/${GVM_LIBS_VERSION}.tar.gz && \
-    curl -o openvas.tar.gz -sL https://github.com/greenbone/openvas/archive/${OPENVAS_VERSION}.tar.gz && \
-    curl -o gvmd.tar.gz -sL https://github.com/greenbone/gvmd/archive/${GVMD_VERSION}.tar.gz && \
-    curl -o openvas-smb.tar.gz -sL https://github.com/greenbone/openvas-smb/archive/${OPENVAS_SMB_VERSION}.tar.gz && \
-    curl -o ospd-openvas.tar.gz -sL https://github.com/greenbone/ospd-openvas/archive/${OSPD_OPENVAS_VERSION}.tar.gz && \
-    curl -o ospd.tar.gz -sL https://github.com/greenbone/ospd/archive/${OSPD_VERSION}.tar.gz && \
+    curl -k -o gvm-libs.tar.gz -sL https://github.com/greenbone/gvm-libs/archive/${GVM_LIBS_VERSION}.tar.gz && \
+    curl -k -o openvas.tar.gz -sL https://github.com/greenbone/openvas/archive/${OPENVAS_VERSION}.tar.gz && \
+    curl -k -o gvmd.tar.gz -sL https://github.com/greenbone/gvmd/archive/${GVMD_VERSION}.tar.gz && \
+    curl -k -o openvas-smb.tar.gz -sL https://github.com/greenbone/openvas-smb/archive/${OPENVAS_SMB_VERSION}.tar.gz && \
+    curl -k -o ospd-openvas.tar.gz -sL https://github.com/greenbone/ospd-openvas/archive/${OSPD_OPENVAS_VERSION}.tar.gz && \
+    curl -k -o ospd.tar.gz -sL https://github.com/greenbone/ospd/archive/${OSPD_VERSION}.tar.gz && \
     find . -name \*.gz -exec tar zxvfp {} \;
 
 RUN cd ${SRC_PATH}/ospd-openvas* && \
