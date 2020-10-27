@@ -9,4 +9,5 @@ then
     sudo sh get-docker.sh
 fi
 
-docker run hello-world
+sudo docker run hello-world
+sudo reboot
