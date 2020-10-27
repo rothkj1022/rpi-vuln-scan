@@ -3,7 +3,7 @@
 sudo apt update
 sudo apt upgrade -y
 
-if ! command -v COMMAND &> /dev/null
+if ! command -v docker &> /dev/null
 then
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
