@@ -24,7 +24,7 @@ email="$email"
 
 EOF
 
-cat > /home/pi/rpi-scanner/rpi-scan.sh <<'EOF'
+cat >> /home/pi/rpi-scanner/rpi-scan.sh <<'EOF'
 ip_addr=$(/sbin/ifconfig eth0 | grep "inet " | awk '{print $2}')
 ip_subnet=$(echo $ip_addr | cut -d'.' -f1,2,3)
 ip_subnet+=".0/24"
