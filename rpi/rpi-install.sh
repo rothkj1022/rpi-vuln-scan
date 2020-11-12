@@ -47,4 +47,4 @@ then
 fi
 
 sudo docker run hello-world
-sudo reboot
+echo "Installation finished successfully! Plug your RPi into your router with an Ethernet cable and restart it."
