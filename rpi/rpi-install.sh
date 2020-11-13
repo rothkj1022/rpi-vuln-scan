@@ -14,7 +14,7 @@ cat > /home/pi/rpi-scanner/rpi-scan.sh <<'EOF'
 #!/usr/bin/env bash
 
 # need to give network interfaces time to come up before starting
-sleep 60
+sleep 180
 
 EOF
 
@@ -44,6 +44,7 @@ if ! command -v docker &> /dev/null
 then
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
+    sudo usermod -aG docker pi
 fi
 
 sudo docker run hello-world
