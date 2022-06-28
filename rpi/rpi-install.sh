@@ -40,7 +40,7 @@ done
 
 cd ~
 mkdir /home/$username/rpi-scanner
-(crontab -l ; echo '@reboot /bin/bash -c ". ~/.bashrc; /home/$username/rpi-scanner/rpi-scan.sh > /tmp/rpi-scanner.txt 2>&1"') | crontab -
+(crontab -l ; echo "@reboot /bin/bash -c \". ~/.bashrc; /home/$username/rpi-scanner/rpi-scan.sh > /tmp/rpi-scanner.txt 2>&1\"") | crontab -
 
 # Learned about heredoc magic: https://unix.stackexchange.com/questions/138418/passing-a-variable-to-a-bash-script-that-uses-eof-and-considers-the-variable-a
 cat > /home/$username/rpi-scanner/rpi-scan.sh <<EOF
